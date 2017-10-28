@@ -9,6 +9,8 @@ public interface DataBase extends Serializable{
 
     public <T extends Model> List<T> getWholeList(Class<T> clazz);
 
+    public <T extends Model> List<T> getWholeList(Class<T> clazz, QueryParameter...filters);
+
     public <T extends Model> T getItemById(Class<T> clazzToRetireve, Integer id);
 
     public <T extends  Model> T persistI(T entity);

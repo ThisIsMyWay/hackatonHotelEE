@@ -7,12 +7,18 @@ import java.sql.Date;
 @Entity
 public class Booking extends Model {
 
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE_BOOKING")
+    @SequenceGenerator(name = "SEQUENCE_BOOKING", sequenceName = "SEQUENCE_BOOKING", allocationSize = 1, initialValue = 1)
+    private Integer id;
+
     @ManyToOne(optional = false)
-    @JoinColumn(name = "room_id", referencedColumnName = "id")
+    @JoinColumn(name = "ROOM_ID", referencedColumnName = "ID")
     private Room room;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     private User user;
 
     @Column(name = "DATE_FROM")
@@ -20,6 +26,14 @@ public class Booking extends Model {
 
     @Column(name = "DATE_TO")
     private Date dateTo;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Room getRoom() {
         return room;
