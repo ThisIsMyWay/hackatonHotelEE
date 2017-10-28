@@ -41,6 +41,8 @@ public class RoomBooking {
     private DatePicker dateFrom;
     @FXML
     private DatePicker dateTo;
+    @FXML
+    private Label roomStatus;
 
     private ResteasyClient client;
     private UsersInterface usersInterface;
@@ -129,6 +131,7 @@ public class RoomBooking {
         roomInfo.setText(tmp);
         String roomId = tmp.substring(3, tmp.indexOf(" "));
         room = setRoomById(Integer.valueOf(roomId));
+        System.out.println("Room number " + room.getRoomNumber());
     }
 
     private Room setRoomById(int roomId) {
@@ -145,6 +148,7 @@ public class RoomBooking {
         String tmp = userList.getSelectionModel().getSelectedItem();
         String userId = tmp.substring(3, tmp.indexOf(" "));
         user = setUserById(Integer.valueOf(userId));
+        System.out.println("User id " + userId);
     }
 
     private User setUserById(int userId) {
@@ -168,8 +172,11 @@ public class RoomBooking {
         date = Date.from(instant);
         long dateToAsLong = date.getTime();
 
-        isAvailable = roomsInterface.;
+        System.out.println(dateFromAsLong  +  "    " + dateToAsLong);
+        System.out.println("Room to check: " + room.getRoomNumber());
+        isAvailable = roomsInterface.checkBooking(room.getRoomNumber(), dateFromAsLong, dateToAsLong);
 
+        roomStatus.setText(isAvailable ? "DOSTĘPNY" : "NIEDOSTĘPN");
 
     }
 
