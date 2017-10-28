@@ -17,7 +17,7 @@ public class Room extends Model {
 
     @Column(name = "TYPE")
     @Enumerated(EnumType.STRING)
-    private RoomType type;
+    private String type;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
     private List<Booking> bookings;
@@ -38,11 +38,11 @@ public class Room extends Model {
         this.roomNr = roomNr;
     }
 
-    public RoomType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(RoomType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
