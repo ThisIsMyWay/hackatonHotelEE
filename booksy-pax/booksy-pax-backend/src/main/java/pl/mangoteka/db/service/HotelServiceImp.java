@@ -2,10 +2,13 @@ package pl.mangoteka.db.service;
 
 import org.jboss.logging.Logger;
 import pl.mangoteka.db.DataBase;
+import pl.mangoteka.db.model.Booking;
+import pl.mangoteka.db.model.Room;
 
 import javax.ejb.Init;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
+import java.util.List;
 
 @Stateful
 public class HotelServiceImp implements HotelService {
@@ -23,4 +26,28 @@ public class HotelServiceImp implements HotelService {
     }
 
 
+    @Override
+    public List<Room> getRooms() {
+        return null;
+    }
+
+    @Override
+    public Room getRoom(int roomId) {
+        return null;
+    }
+
+    @Override
+    public int makeBooking(int roomNumber, long dateFrom, long dateTo, int clientId) {
+        return 0;
+    }
+
+    @Override
+    public boolean deleteBooking(int reservationId) {
+        return false;
+    }
+
+    @Override
+    public List<Booking> getBookings() {
+        return null;
+    }
 }
