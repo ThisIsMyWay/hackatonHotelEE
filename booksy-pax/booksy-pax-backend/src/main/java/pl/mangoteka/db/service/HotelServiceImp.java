@@ -48,8 +48,8 @@ public class HotelServiceImp implements HotelService {
         booking.setDateTo(new Date(dateTo));
         booking.setRoom(null);// todo
         booking.setUser(db.getItemById(User.class, userId));
-        db.persistI(booking);
-        return booking.getId();
+        Booking newBooking = db.persistI(booking);
+        return newBooking.getId();
     }
 
     @Override
@@ -62,11 +62,11 @@ public class HotelServiceImp implements HotelService {
 
     @Override
     public List<Booking> getBookings() {
-        return null;
+        return db.getWholeList(Booking.class);
     }
 
     @Override
     public List<User> getUsers() {
-        return null;
+        return db.getWholeList(User.class);
     }
 }
