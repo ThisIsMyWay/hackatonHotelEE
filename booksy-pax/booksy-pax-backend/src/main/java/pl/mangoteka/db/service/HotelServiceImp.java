@@ -10,6 +10,7 @@ import pl.mangoteka.db.qualifiers.MockDb;
 import javax.ejb.Init;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
+import java.sql.Date;
 import java.util.List;
 
 @Stateful
@@ -31,22 +32,32 @@ public class HotelServiceImp implements HotelService {
 
     @Override
     public List<Room> getRooms() {
-        return null;
+        return db.getWholeList(Room.class);
     }
 
     @Override
     public Room getRoom(int roomId) {
+        // todo get room by room number
         return null;
     }
 
     @Override
-    public int makeBooking(int roomNumber, long dateFrom, long dateTo, int clientId) {
-        return 0;
+    public int makeBooking(int roomNumber, long dateFrom, long dateTo, int userId) {
+        Booking booking = new Booking();
+        booking.setDateFrom(new Date(dateFrom));
+        booking.setDateTo(new Date(dateTo));
+        booking.setRoom(null);// todo
+        booking.setUser(db.getItemById(User.class, userId));
+        db.persistI(booking);
+        return booking.getId();
     }
 
     @Override
-    public boolean deleteBooking(int reservationId) {
-        return false;
+    public boolean deleteBooking(int bookingId) {
+        Booking booking = db.getItemById(Booking.class, bookingId);
+        if (booking == null) return false;
+        db.remove(booking);
+        return true;
     }
 
     @Override

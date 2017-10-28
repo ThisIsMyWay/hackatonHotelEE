@@ -1,6 +1,6 @@
 package pl.mangoteka.booksy.service.rest;
 
-import pl.mangoteka.booksy.service.data.User;
+import pl.mangoteka.booksy.service.data.Booking;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,12 +11,13 @@ import java.io.Serializable;
 import java.util.List;
 
 
-@Path("/clients")
+@Path("/bookings")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public interface ClientsInterface extends Serializable {
+public interface BookingsInterface extends Serializable {
+
 
     @Path("/")
     @GET
-    List<User> getClients();
+    List<Booking> getBookings();
 }

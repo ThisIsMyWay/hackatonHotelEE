@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SessionScoped
-public class HotelRestService implements ClientsInterface, ReservationsInterface, RoomsInterface {
+public class HotelRestService implements UsersInterface, BookingsInterface, RoomsInterface {
 
     @Context
     private HttpServletRequest httpRequest;
@@ -51,10 +51,10 @@ public class HotelRestService implements ClientsInterface, ReservationsInterface
     }
 
     @Override
-    public int makeBooking(int roomNumber, long dateFrom, long dateTo, int clientId) {
+    public int makeBooking(int roomNumber, long dateFrom, long dateTo, int userId) {
         System.out.println("makeBooking: " + roomNumber + " dateFrom: " + dateFrom +
-                " dateTo: " + dateTo + " clientId: " + clientId);
-        return hotel.makeBooking(roomNumber, dateFrom, dateTo, clientId);
+                " dateTo: " + dateTo + " clientId: " + userId);
+        return hotel.makeBooking(roomNumber, dateFrom, dateTo, userId);
     }
 
     @Override
@@ -83,8 +83,8 @@ public class HotelRestService implements ClientsInterface, ReservationsInterface
     }
 
     @Override
-    public List<User> getClients() {
-        System.out.println("getClients");
+    public List<User> getUsers() {
+        System.out.println("getUsers");
         List<pl.mangoteka.db.model.User> entities = hotel.getUsers();
         List<User> users = new ArrayList<>();
         for (pl.mangoteka.db.model.User entity : entities) {

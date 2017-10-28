@@ -14,7 +14,7 @@ public interface HotelService {
 
     Room getRoom(int roomId);
 
-    int makeBooking(int roomNumber, long dateFrom, long dateTo, int clientId);
+    int makeBooking(int roomNumber, long dateFrom, long dateTo, int userId);
 
     boolean deleteBooking(int reservationId);
 
