@@ -4,13 +4,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "USERS")
 public class User extends Model {
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE_BOOKING")
-    @SequenceGenerator(name = "SEQUENCE_BOOKING", sequenceName = "SEQUENCE_BOOKING", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE_USER")
+    @SequenceGenerator(name = "SEQUENCE_USER", sequenceName = "SEQUENCE_USER", allocationSize = 1, initialValue = 1)
     private Integer id;
 
     @Column(name = "NAME")
