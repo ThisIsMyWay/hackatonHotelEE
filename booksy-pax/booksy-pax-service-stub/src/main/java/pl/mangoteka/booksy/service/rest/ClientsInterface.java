@@ -18,5 +18,5 @@ public interface ClientsInterface extends Serializable {
 
     @Path("/")
     @GET
-    List<Client> getRooms();
+    List<Client> getClients();
 }
