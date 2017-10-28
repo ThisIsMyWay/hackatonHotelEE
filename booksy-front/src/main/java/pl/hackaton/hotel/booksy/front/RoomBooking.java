@@ -56,6 +56,8 @@ public class RoomBooking {
     private User user;
     private Room room;
     private boolean isAvailable;
+    private long dateFromAsLong;
+    private long dateToAsLong;
 
 
     @FXML
@@ -77,8 +79,6 @@ public class RoomBooking {
 
         if (!rooms.isEmpty()) {
             roomListProperty.set(FXCollections.observableArrayList(buildRoomsListToString(rooms)));
-            dateFrom.setDisable(false);
-            dateTo.setDisable(false);
         } else {
             roomListProperty.set(FXCollections.observableArrayList(getErrorList()));
         }
@@ -137,6 +137,8 @@ public class RoomBooking {
         String roomId = tmp.substring(3, tmp.indexOf(" "));
         room = setRoomById(Integer.valueOf(roomId));
         bookRoom.setDisable(true);
+        dateFrom.setDisable(false);
+        dateTo.setDisable(false);
         System.out.println("Room number " + room.getRoomNumber());
     }
 
@@ -171,12 +173,12 @@ public class RoomBooking {
         LocalDate localDate = dateFrom.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
-        long dateFromAsLong = date.getTime();
+        dateFromAsLong = date.getTime();
 
         localDate = dateTo.getValue();
         instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         date = Date.from(instant);
-        long dateToAsLong = date.getTime();
+        dateToAsLong = date.getTime();
 
         isAvailable = roomsInterface.checkBooking(room.getRoomNumber(), dateFromAsLong, dateToAsLong);
 
@@ -185,7 +187,13 @@ public class RoomBooking {
             bookRoom.setDisable(false);
         }
         roomStatus.setText(isAvailable ? "DOSTĘPNY" : "NIEDOSTĘPN");
-
     }
+
+    @FXML
+    private void bookRoom() {
+        int bookId = roomsInterface.makeBooking(room.getRoomNumber(), dateFromAsLong, dateToAsLong, user.getId());
+        roomStatus.setText("Rezerwacja nr: " + bookId);
+    }
+
 
 }

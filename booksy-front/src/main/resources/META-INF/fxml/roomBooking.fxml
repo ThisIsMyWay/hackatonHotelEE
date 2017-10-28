@@ -59,7 +59,8 @@
             <Label fx:id="roomInfo" text="Informacja o pokoju"/>
             <HBox spacing="50.0" GridPane.rowIndex="3">
                 <children>
-                    <Button fx:id="bookRoom" disable="true" mnemonicParsing="false" text="Zarezerwuj"/>
+                    <Button fx:id="bookRoom" disable="true" mnemonicParsing="false" text="Zarezerwuj"
+                            onMouseClicked="#bookRoom"/>
                     <Button mnemonicParsing="false" text="Historia"/>
                     <Button mnemonicParsing="false" text="Usuń rezerwację"/>
                 </children>
