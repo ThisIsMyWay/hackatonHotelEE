@@ -6,11 +6,16 @@ import java.util.List;
 @Entity
 @Table(name = "ROOM")
 public class Room extends Model {
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE_BOOKING")
+    @SequenceGenerator(name = "SEQUENCE_BOOKING", sequenceName = "SEQUENCE_BOOKING", allocationSize = 1, initialValue = 1)
+    private Integer id;
 
-    @Column (name = "ROOM_NR")
+    @Column(name = "ROOM_NR")
     private Integer roomNr;
 
-    @Column (name = "TYPE")
+    @Column(name = "TYPE")
     private String type;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
@@ -38,5 +43,13 @@ public class Room extends Model {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
