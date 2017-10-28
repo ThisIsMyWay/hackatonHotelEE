@@ -5,7 +5,7 @@ public class QueryParameter {
     private String name;
     private Object value;
 
-    private QueryParameter(String name, Object value) {
+    public QueryParameter(String name, Object value) {
         this.name = name;
         this.value = value;
     }

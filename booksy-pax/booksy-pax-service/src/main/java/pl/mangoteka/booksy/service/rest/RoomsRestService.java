@@ -66,4 +66,18 @@ public class RoomsRestService implements RoomsInterface {
             return Response.created(URI.create("/failed")).status(Response.Status.BAD_REQUEST).header("error", "cannot delete booking").build();
         }
     }
+
+    @Override
+    public boolean checkBooking(int roomId, long dateFrom, long dateTo) {
+        System.out.println("checkBooking " + roomId + " from " + dateFrom + " to " + dateTo);
+        pl.mangoteka.db.model.Room room = hotel.getRoom(roomId);
+        List<Booking> bookings = room.getBookings();
+        for (Booking b : bookings){
+            if(b.getDateTo().getTime()< System.currentTimeMillis()) continue;
+            if (b.getDateTo().getTime() > dateFrom || b.getDateFrom().getTime() < dateTo) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

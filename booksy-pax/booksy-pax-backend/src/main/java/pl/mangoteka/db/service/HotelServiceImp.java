@@ -2,10 +2,10 @@ package pl.mangoteka.db.service;
 
 import org.jboss.logging.Logger;
 import pl.mangoteka.db.DataBase;
+import pl.mangoteka.db.QueryParameter;
 import pl.mangoteka.db.model.Booking;
 import pl.mangoteka.db.model.Room;
 import pl.mangoteka.db.model.User;
-import pl.mangoteka.db.qualifiers.MockDb;
 import pl.mangoteka.db.qualifiers.OracleDb;
 
 import javax.ejb.Init;
@@ -38,8 +38,7 @@ public class HotelServiceImp implements HotelService {
 
     @Override
     public Room getRoom(int roomId) {
-        // todo get room by room number
-        return null;
+        return db.getWholeList(Room.class, new QueryParameter("roomNr", roomId)).get(0);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class HotelServiceImp implements HotelService {
         Booking booking = new Booking();
         booking.setDateFrom(new Date(dateFrom));
         booking.setDateTo(new Date(dateTo));
-        booking.setRoom(null);// todo
+        booking.setRoom(db.getWholeList(Room.class, new QueryParameter("roomNr", roomNumber)).get(0));
         booking.setUser(db.getItemById(User.class, userId));
         Booking newBooking = db.persistI(booking);
         return newBooking.getId();

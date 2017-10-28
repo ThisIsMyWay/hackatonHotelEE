@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SessionScoped
-@MockDb
 public class MockDataBase implements DataBase {
 
     private List<User> users;

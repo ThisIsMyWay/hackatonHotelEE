@@ -30,4 +30,8 @@ public interface RoomsInterface extends Serializable {
     @DELETE
     Response deleteBooking(@PathParam("booking_id") int bookingId);
 
+    @Path("/{room_id}")
+    @GET
+    boolean checkBooking(@PathParam("room_id") int roomId,
+                         @MatrixParam("from") long dateFrom, @MatrixParam("to") long dateTo);
 }
