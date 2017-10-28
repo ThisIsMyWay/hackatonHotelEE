@@ -6,7 +6,7 @@ import pl.mangoteka.db.model.Room;
 import pl.mangoteka.db.model.User;
 import pl.mangoteka.db.qualifiers.MockDb;
 
-import javax.ejb.Init;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -16,12 +16,13 @@ import java.util.List;
 @MockDb
 public class MockDataBase implements DataBase {
 
-    List<User> users;
-    List<Room> rooms;
-    List<Booking> bookings;
+    private List<User> users;
+    private List<Room> rooms;
+    private List<Booking> bookings;
 
-    @Init
+    @PostConstruct
     public void init() {
+        System.out.println("MockDataBase init");
         users = new ArrayList<>();
         rooms = new ArrayList<>();
         bookings = new ArrayList<>();
@@ -69,11 +70,12 @@ public class MockDataBase implements DataBase {
 
     @Override
     public <T extends Model> List<T> getWholeList(Class<T> clazz) {
-        if (clazz.isInstance(User.class)) {
+        String name = clazz.getCanonicalName();
+        if (name.equals(User.class.getCanonicalName())) {
             return (List<T>) users;
-        } else if (clazz.isInstance(Room.class)) {
+        } else if (name.equals(Room.class.getCanonicalName())) {
             return (List<T>) rooms;
-        } else if (clazz.isInstance(Booking.class)) {
+        } else if (name.equals(Booking.class.getCanonicalName())) {
             return (List<T>) bookings;
         }
         return null;
@@ -81,11 +83,12 @@ public class MockDataBase implements DataBase {
 
     @Override
     public <T extends Model> List<T> getWholeList(Class<T> clazz, QueryParameter... filters) {
-        if (clazz.isInstance(User.class)) {
+        String name = clazz.getCanonicalName();
+        if (name.equals(User.class.getCanonicalName())) {
             return (List<T>) users.get(0);
-        } else if (clazz.isInstance(Room.class)) {
+        } else if (name.equals(Room.class.getCanonicalName())) {
             return (List<T>) rooms.get(0);
-        } else if (clazz.isInstance(Booking.class)) {
+        } else if (name.equals(Booking.class.getCanonicalName())) {
             return (List<T>) bookings.get(0);
         }
         return null;
@@ -93,14 +96,16 @@ public class MockDataBase implements DataBase {
 
     @Override
     public <T extends Model> T getItemById(Class<T> clazzToRetireve, Integer id) {
-        if (clazzToRetireve.isInstance(User.class)) {
+        String name = clazzToRetireve.getCanonicalName();
+        if (name.equals(User.class.getCanonicalName())) {
             return (T) users.stream().filter(user -> user.getId().equals(id)).findFirst().get();
-        } else if (clazzToRetireve.isInstance(Room.class)) {
+        } else if (name.equals(Room.class.getCanonicalName())) {
             return (T) rooms.stream().filter(room -> room.getId().equals(id)).findFirst().get();
-        } else if (clazzToRetireve.isInstance(Booking.class)) {
+        } else if (name.equals(Booking.class.getCanonicalName())) {
             return (T) bookings.stream().filter(booking -> booking.getId().equals(id)).findFirst().get();
         }
         return null;
+
     }
 
     @Override

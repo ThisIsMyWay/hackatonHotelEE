@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SessionScoped
-public class HotelRestService implements UsersInterface, BookingsInterface, RoomsInterface {
+public class RoomsRestService implements RoomsInterface {
 
     @Context
     private HttpServletRequest httpRequest;
@@ -27,7 +27,7 @@ public class HotelRestService implements UsersInterface, BookingsInterface, Room
 
     @PostConstruct
     private void init() {
-        System.out.println("INIT REST SERVICE: " + httpRequest.getContextPath());
+        System.out.println("INIT REST SERVICE Rooms: " + httpRequest.getContextPath());
         System.out.println("SID: " + httpRequest.getSession().getId());
         System.out.println("HOTEL SERVICE: " + hotel);
     }
@@ -65,31 +65,5 @@ public class HotelRestService implements UsersInterface, BookingsInterface, Room
         } else {
             return Response.created(URI.create("/failed")).status(Response.Status.BAD_REQUEST).header("error", "cannot delete booking").build();
         }
-    }
-
-    @Override
-    public List<Booking> getBookings() {
-        System.out.println("getBookings");
-        List<pl.mangoteka.db.model.Booking> entities = hotel.getBookings();
-        List<Booking> bookings = new ArrayList<>();
-        for (pl.mangoteka.db.model.Booking entity : entities) {
-            pl.mangoteka.db.model.User u = entity.getUser();
-            bookings.add(new Booking(entity.getDateFrom().getTime(), entity.getDateTo().getTime(),
-                    u.getName(), u.getSurname(),
-                    u.getPesel(), entity.getRoom().getRoomNr()));
-        }
-
-        return bookings;
-    }
-
-    @Override
-    public List<User> getUsers() {
-        System.out.println("getUsers");
-        List<pl.mangoteka.db.model.User> entities = hotel.getUsers();
-        List<User> users = new ArrayList<>();
-        for (pl.mangoteka.db.model.User entity : entities) {
-            users.add(new User(entity.getId(), entity.getName(), entity.getSurname(), entity.getPesel()));
-        }
-        return users;
     }
 }
