@@ -4,6 +4,8 @@ import org.jboss.logging.Logger;
 import pl.mangoteka.db.DataBase;
 import pl.mangoteka.db.model.Booking;
 import pl.mangoteka.db.model.Room;
+import pl.mangoteka.db.model.User;
+import pl.mangoteka.db.qualifiers.MockDb;
 
 import javax.ejb.Init;
 import javax.ejb.Stateful;
@@ -17,6 +19,7 @@ public class HotelServiceImp implements HotelService {
     private Logger logger;
 
     @Inject
+    @MockDb
     private DataBase db;
 
 
@@ -48,6 +51,11 @@ public class HotelServiceImp implements HotelService {
 
     @Override
     public List<Booking> getBookings() {
+        return null;
+    }
+
+    @Override
+    public List<User> getUsers() {
         return null;
     }
 }

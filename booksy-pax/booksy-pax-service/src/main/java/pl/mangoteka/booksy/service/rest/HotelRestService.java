@@ -23,7 +23,7 @@ public class HotelRestService implements ClientsInterface, ReservationsInterface
     private HttpServletRequest httpRequest;
 
     @EJB
-    HotelService hotel;
+    private HotelService hotel;
 
     @PostConstruct
     private void init() {
@@ -85,6 +85,11 @@ public class HotelRestService implements ClientsInterface, ReservationsInterface
     @Override
     public List<User> getClients() {
         System.out.println("getClients");
-        return null;
+        List<pl.mangoteka.db.model.User> entities = hotel.getUsers();
+        List<User> users = new ArrayList<>();
+        for (pl.mangoteka.db.model.User entity : entities) {
+            users.add(new User(entity.getId(), entity.getName(), entity.getSurname(), entity.getPesel()));
+        }
+        return users;
     }
 }

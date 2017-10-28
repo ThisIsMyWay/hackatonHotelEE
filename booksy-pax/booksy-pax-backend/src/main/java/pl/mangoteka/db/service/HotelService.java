@@ -2,6 +2,7 @@ package pl.mangoteka.db.service;
 
 import pl.mangoteka.db.model.Booking;
 import pl.mangoteka.db.model.Room;
+import pl.mangoteka.db.model.User;
 
 import javax.ejb.Local;
 import java.util.List;
@@ -18,4 +19,6 @@ public interface HotelService {
     boolean deleteBooking(int reservationId);
 
     List<Booking> getBookings();
+
+    List<User> getUsers();
 }
