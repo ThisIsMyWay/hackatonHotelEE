@@ -4,6 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -20,7 +21,11 @@ import pl.mangoteka.booksy.service.rest.RoomsInterface;
 import pl.mangoteka.booksy.service.rest.UsersInterface;
 
 import javax.ws.rs.core.UriBuilder;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +37,10 @@ public class RoomBooking {
     private ListView<String> userList;
     @FXML
     private Label roomInfo;
+    @FXML
+    private DatePicker dateFrom;
+    @FXML
+    private DatePicker dateTo;
 
     private ResteasyClient client;
     private UsersInterface usersInterface;
@@ -41,6 +50,8 @@ public class RoomBooking {
     private List<Room> rooms;
     private User user;
     private Room room;
+    private boolean isAvailable;
+
 
     @FXML
     public void initialize() {
@@ -55,18 +66,10 @@ public class RoomBooking {
     }
 
     private void displayRoomList() {
-        List<Room> rooms = roomsInterface.getRooms();
+        rooms = roomsInterface.getRooms();
         ListProperty<String> roomListProperty = new SimpleListProperty<>();
         roomsList.itemsProperty().bind(roomListProperty);
 
-//        List<Room> roomsMock = new ArrayList<>();
-//        Room room = new Room(1, RoomType.SINGLE);
-//        roomsMock.add(room);
-//        room = new Room(2, RoomType.DOUBLE);
-//        roomsMock.add(room);
-//        room = new Room(3, RoomType.DOUBLE);
-//        roomsMock.add(room);
-//        rooms = roomsMock;
         if (!rooms.isEmpty()) {
             roomListProperty.set(FXCollections.observableArrayList(buildRoomsListToString(rooms)));
         } else {
@@ -81,19 +84,11 @@ public class RoomBooking {
     }
 
     private void displayUserList() {
-        List<User> users = usersInterface.getUsers();
+        users = usersInterface.getUsers();
 
         ListProperty<String> userListProperty = new SimpleListProperty<>();
         userList.itemsProperty().bind(userListProperty);
 
-//        List<User> usersMock = new ArrayList<>();
-//        User user = new User(1, "Janusz", "Warchoł", "123456789");
-//        usersMock.add(user);
-//        user = new User(2, "Grażyna", "Patriotyczna", "321654987");
-//        usersMock.add(user);
-//        user = new User(3, "Brajan", "Husarski", "456789123");
-//        usersMock.add(user);
-//        users = usersMock;
         if (!users.isEmpty()) {
             userListProperty.set(FXCollections.observableArrayList(buildUsersListToString(users)));
         } else {
@@ -159,6 +154,23 @@ public class RoomBooking {
             }
         }
         return null;
+    }
+
+    @FXML
+    private void checkBooking() {
+        LocalDate localDate = dateFrom.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date date = Date.from(instant);
+        long dateFromAsLong = date.getTime();
+
+        localDate = dateTo.getValue();
+        instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        date = Date.from(instant);
+        long dateToAsLong = date.getTime();
+
+        isAvailable = roomsInterface.;
+
+
     }
 
 }
