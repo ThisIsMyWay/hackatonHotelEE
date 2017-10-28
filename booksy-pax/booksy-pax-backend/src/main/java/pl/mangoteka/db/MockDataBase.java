@@ -65,8 +65,6 @@ public class MockDataBase implements DataBase {
         bookings.add(b2);
 
         u1.setBookings(bookings);
-
-
     }
 
     @Override
@@ -77,6 +75,18 @@ public class MockDataBase implements DataBase {
             return (List<T>) rooms;
         } else if (clazz.isInstance(Booking.class)) {
             return (List<T>) bookings;
+        }
+        return null;
+    }
+
+    @Override
+    public <T extends Model> List<T> getWholeList(Class<T> clazz, QueryParameter... filters) {
+        if (clazz.isInstance(User.class)) {
+            return (List<T>) users.get(0);
+        } else if (clazz.isInstance(Room.class)) {
+            return (List<T>) rooms.get(0);
+        } else if (clazz.isInstance(Booking.class)) {
+            return (List<T>) bookings.get(0);
         }
         return null;
     }
@@ -95,7 +105,6 @@ public class MockDataBase implements DataBase {
 
     @Override
     public <T extends Model> T persistI(T entity) {
-        entity.setId(222);
         return entity;
     }
 
