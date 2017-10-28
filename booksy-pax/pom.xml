@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+   <groupId>pl.mangoteka</groupId>
+    <artifactId>booksy</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <name>CODE:ME PAX</name>
+  <artifactId>booksy-pax</artifactId>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>booksy-pax-backend</module>
+    <module>booksy-pax-service</module>
+    <module>booksy-pax-service-stub</module>
+    <module>booksy-pax-app</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+  <groupId>pl.mangoteka</groupId>
+        <artifactId>booksy-pax-ejb</artifactId>
+        <version>${project.version}</version>
+        <type>ejb</type>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+ <groupId>pl.mangoteka</groupId>
+        <artifactId>booksy-pax-web</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.bom</groupId>
+        <artifactId>wildfly</artifactId>
+        <version>${version.wildfly.bom}</version>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.javaee</groupId>
+        <artifactId>jboss-transaction-api</artifactId>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>
