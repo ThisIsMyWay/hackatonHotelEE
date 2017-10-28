@@ -23,11 +23,11 @@ public interface RoomsInterface extends Serializable {
 
     @Path("/{room_id}")
     @POST
-    int makeReservation(@PathParam("room_id") int roomId, @MatrixParam("from") long dateFrom,
-                        @MatrixParam("to") long dateTo, @MatrixParam("client_id") int clientId);
+    int makeBooking(@PathParam("room_id") int roomId, @MatrixParam("from") long dateFrom,
+                    @MatrixParam("to") long dateTo, @MatrixParam("client_id") int clientId);
 
     @Path("/{reservation_id}")
     @DELETE
-    Response deleteReservation(@PathParam("reservation_id") int reservationId);
+    Response deleteBooking(@PathParam("reservation_id") int reservationId);
 
 }

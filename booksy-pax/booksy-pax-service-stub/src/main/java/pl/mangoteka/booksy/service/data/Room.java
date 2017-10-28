@@ -9,4 +9,12 @@ public class Room implements Serializable {
 
     private int roomNumber;
     private RoomType type;
+
+    public Room() {
+    }
+
+    public Room(int roomNumber, RoomType type) {
+        this.roomNumber = roomNumber;
+        this.type = type;
+    }
 }

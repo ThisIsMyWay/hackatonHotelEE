@@ -1,6 +1,6 @@
 package pl.mangoteka.booksy.service.rest;
 
-import pl.mangoteka.booksy.service.data.Client;
+import pl.mangoteka.booksy.service.data.User;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -18,5 +18,5 @@ public interface ClientsInterface extends Serializable {
 
     @Path("/")
     @GET
-    List<Client> getClients();
+    List<User> getClients();
 }

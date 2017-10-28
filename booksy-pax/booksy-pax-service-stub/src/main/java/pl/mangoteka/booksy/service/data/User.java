@@ -4,11 +4,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Reservation {
-    long from;
-    long to;
-    String clientName;
-    String clientSurname;
-    long pesel;
-    int roomNumber;
+public class User {
+    int id;
+    String name;
+    String surname;
+    String pesel;
 }

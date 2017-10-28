@@ -1,6 +1,6 @@
 package pl.mangoteka.booksy.service.rest;
 
-import pl.mangoteka.booksy.service.data.Reservation;
+import pl.mangoteka.booksy.service.data.Booking;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -19,5 +19,5 @@ public interface ReservationsInterface extends Serializable {
 
     @Path("/")
     @GET
-    List<Reservation> getReservations();
+    List<Booking> getBookings();
 }
