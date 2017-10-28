@@ -4,19 +4,20 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "ROOM")
+@Table(name = "ROOMS")
 public class Room extends Model {
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE_BOOKING")
-    @SequenceGenerator(name = "SEQUENCE_BOOKING", sequenceName = "SEQUENCE_BOOKING", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE_ROOM")
+    @SequenceGenerator(name = "SEQUENCE_ROOM", sequenceName = "SEQUENCE_ROOM", allocationSize = 1, initialValue = 1)
     private Integer id;
 
     @Column(name = "ROOM_NR")
     private Integer roomNr;
 
     @Column(name = "TYPE")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private RoomType type;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
     private List<Booking> bookings;
@@ -37,11 +38,11 @@ public class Room extends Model {
         this.roomNr = roomNr;
     }
 
-    public String getType() {
+    public RoomType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(RoomType type) {
         this.type = type;
     }
 
