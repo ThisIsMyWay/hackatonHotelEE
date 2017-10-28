@@ -16,7 +16,6 @@ public class Room extends Model {
     private Integer roomNr;
 
     @Column(name = "TYPE")
-    @Enumerated(EnumType.STRING)
     private String type;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
