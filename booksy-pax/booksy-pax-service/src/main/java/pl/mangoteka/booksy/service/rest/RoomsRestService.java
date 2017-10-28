@@ -1,9 +1,8 @@
 package pl.mangoteka.booksy.service.rest;
 
-import pl.mangoteka.booksy.service.data.RoomType;
-import pl.mangoteka.booksy.service.data.User;
-import pl.mangoteka.booksy.service.data.Booking;
 import pl.mangoteka.booksy.service.data.Room;
+import pl.mangoteka.booksy.service.data.RoomType;
+import pl.mangoteka.db.model.Booking;
 import pl.mangoteka.db.service.HotelService;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 

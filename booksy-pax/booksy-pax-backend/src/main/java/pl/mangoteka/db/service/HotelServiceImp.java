@@ -6,6 +6,7 @@ import pl.mangoteka.db.model.Booking;
 import pl.mangoteka.db.model.Room;
 import pl.mangoteka.db.model.User;
 import pl.mangoteka.db.qualifiers.MockDb;
+import pl.mangoteka.db.qualifiers.OracleDb;
 
 import javax.ejb.Init;
 import javax.ejb.Stateful;
@@ -20,7 +21,7 @@ public class HotelServiceImp implements HotelService {
     private Logger logger;
 
     @Inject
-    @MockDb
+    @OracleDb
     private DataBase db;
 
 

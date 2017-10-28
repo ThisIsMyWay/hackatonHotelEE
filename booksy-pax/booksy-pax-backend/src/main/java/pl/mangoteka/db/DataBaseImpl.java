@@ -3,6 +3,7 @@ package pl.mangoteka.db;
 
 import org.jboss.logging.Logger;
 import pl.mangoteka.db.model.Model;
+import pl.mangoteka.db.qualifiers.OracleDb;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -13,7 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
-
+@OracleDb
 @SessionScoped
 public class DataBaseImpl implements DataBase {
 
