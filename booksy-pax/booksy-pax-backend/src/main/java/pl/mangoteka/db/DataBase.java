@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface DataBase {
 
+    public <T extends Model> List<T> getWholeList(Class<T> clazz);
 
     public <T extends Model> List<T> getWholeList(Class<T> clazz, QueryParameter...filters);
 

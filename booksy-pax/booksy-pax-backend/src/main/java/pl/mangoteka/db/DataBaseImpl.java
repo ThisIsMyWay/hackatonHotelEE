@@ -24,6 +24,11 @@ public class DataBaseImpl implements DataBase {
     private EntityManager em;
 
     @Override
+    public <T extends Model> List<T> getWholeList(Class<T> clazz) {
+        return getWholeList(clazz, new QueryParameter[0]);
+    }
+
+    @Override
     public <T extends Model> List<T> getWholeList(Class<T> clazz, QueryParameter... filters) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> q = cb.createQuery(clazz);
