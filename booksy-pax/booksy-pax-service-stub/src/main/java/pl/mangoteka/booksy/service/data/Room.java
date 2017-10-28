@@ -17,4 +17,20 @@ public class Room implements Serializable {
         this.roomNumber = roomNumber;
         this.type = type;
     }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public RoomType getType() {
+        return type;
+    }
+
+    public void setType(RoomType type) {
+        this.type = type;
+    }
 }
