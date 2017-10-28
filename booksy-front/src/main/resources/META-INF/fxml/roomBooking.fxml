@@ -59,7 +59,7 @@
             <Label fx:id="roomInfo" text="Informacja o pokoju"/>
             <HBox spacing="50.0" GridPane.rowIndex="3">
                 <children>
-                    <Button disable="true" mnemonicParsing="false" text="Zarezerwuj"/>
+                    <Button fx:id="bookRoom" disable="true" mnemonicParsing="false" text="Zarezerwuj"/>
                     <Button mnemonicParsing="false" text="Historia"/>
                     <Button mnemonicParsing="false" text="Usuń rezerwację"/>
                 </children>
@@ -70,9 +70,9 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="2">
                 <children>
                     <Label text="Od:"/>
-                    <DatePicker fx:id="dateFrom" prefHeight="25.0" prefWidth="100.0"/>
+                    <DatePicker fx:id="dateFrom" prefHeight="25.0" prefWidth="100.0" disable="true"/>
                     <Label text="Do:"/>
-                    <DatePicker fx:id="dateTo" prefHeight="25.0" prefWidth="100.0"/>
+                    <DatePicker fx:id="dateTo" prefHeight="25.0" prefWidth="100.0" disable="true"/>
                     <Button mnemonicParsing="false" onMouseClicked="#checkBooking" text="Sprawdź"/>
                 </children>
                 <padding>
@@ -82,7 +82,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.rowIndex="1">
                 <children>
                     <Label text="Dostępność pokoju:"/>
-                    <Label fx:id="roomStatus" text=""/>
+                    <Label fx:id="roomStatus" text="Sprawdź status"/>
                 </children>
                 <GridPane.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>

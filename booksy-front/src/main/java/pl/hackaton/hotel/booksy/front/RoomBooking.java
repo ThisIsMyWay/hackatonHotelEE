@@ -4,6 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -43,6 +44,8 @@ public class RoomBooking {
     private DatePicker dateTo;
     @FXML
     private Label roomStatus;
+    @FXML
+    private Button bookRoom;
 
     private ResteasyClient client;
     private UsersInterface usersInterface;
@@ -74,6 +77,8 @@ public class RoomBooking {
 
         if (!rooms.isEmpty()) {
             roomListProperty.set(FXCollections.observableArrayList(buildRoomsListToString(rooms)));
+            dateFrom.setDisable(false);
+            dateTo.setDisable(false);
         } else {
             roomListProperty.set(FXCollections.observableArrayList(getErrorList()));
         }
@@ -131,6 +136,7 @@ public class RoomBooking {
         roomInfo.setText(tmp);
         String roomId = tmp.substring(3, tmp.indexOf(" "));
         room = setRoomById(Integer.valueOf(roomId));
+        bookRoom.setDisable(true);
         System.out.println("Room number " + room.getRoomNumber());
     }
 
@@ -172,10 +178,12 @@ public class RoomBooking {
         date = Date.from(instant);
         long dateToAsLong = date.getTime();
 
-        System.out.println(dateFromAsLong  +  "    " + dateToAsLong);
-        System.out.println("Room to check: " + room.getRoomNumber());
         isAvailable = roomsInterface.checkBooking(room.getRoomNumber(), dateFromAsLong, dateToAsLong);
 
+        if (isAvailable) {
+            roomStatus.setText("DOSTĘPNY");
+            bookRoom.setDisable(false);
+        }
         roomStatus.setText(isAvailable ? "DOSTĘPNY" : "NIEDOSTĘPN");
 
     }

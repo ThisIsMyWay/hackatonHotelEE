@@ -18,7 +18,7 @@ public class Room extends Model {
     @Column(name = "TYPE")
     private String type;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room", fetch = FetchType.EAGER)
     private List<Booking> bookings;
 
     public List<Booking> getBookings() {
