@@ -45,9 +45,9 @@ public class RoomBooking {
     @FXML
     public void initialize() {
 
-//        createRestConn();
-//
-//        createProxy();
+        createRestConn();
+
+        createProxy();
 
         displayRoomList();
 
@@ -55,44 +55,50 @@ public class RoomBooking {
     }
 
     private void displayRoomList() {
-//        List<Room> rooms = roomsInterface.getRooms();
+        List<Room> rooms = roomsInterface.getRooms();
         ListProperty<String> roomListProperty = new SimpleListProperty<>();
         roomsList.itemsProperty().bind(roomListProperty);
 
-        List<Room> roomsMock = new ArrayList<>();
-        Room room = new Room(1, RoomType.SINGLE);
-        roomsMock.add(room);
-        room = new Room(2, RoomType.DOUBLE);
-        roomsMock.add(room);
-        room = new Room(3, RoomType.DOUBLE);
-        roomsMock.add(room);
-        rooms = roomsMock;
-//        if (!rooms.isEmpty()) {
-//            roomListProperty.set(FXCollections.observableArrayList(buildRoomsListToString(rooms)));
-//        } else {
-            roomListProperty.set(FXCollections.observableArrayList(buildRoomsListToString(roomsMock)));
-//        }
+//        List<Room> roomsMock = new ArrayList<>();
+//        Room room = new Room(1, RoomType.SINGLE);
+//        roomsMock.add(room);
+//        room = new Room(2, RoomType.DOUBLE);
+//        roomsMock.add(room);
+//        room = new Room(3, RoomType.DOUBLE);
+//        roomsMock.add(room);
+//        rooms = roomsMock;
+        if (!rooms.isEmpty()) {
+            roomListProperty.set(FXCollections.observableArrayList(buildRoomsListToString(rooms)));
+        } else {
+            roomListProperty.set(FXCollections.observableArrayList(getErrorList()));
+        }
+    }
+
+    private List<String> getErrorList() {
+        List<String> errorList = new ArrayList<>();
+        errorList.add("Wystąpił nieoczekiwany błąd");
+        return errorList;
     }
 
     private void displayUserList() {
-//        List<User> users = usersInterface.getUsers();
+        List<User> users = usersInterface.getUsers();
 
         ListProperty<String> userListProperty = new SimpleListProperty<>();
         userList.itemsProperty().bind(userListProperty);
 
-        List<User> usersMock = new ArrayList<>();
-        User user = new User(1, "Janusz", "Warchoł", "123456789");
-        usersMock.add(user);
-        user = new User(2, "Grażyna", "Patriotyczna", "321654987");
-        usersMock.add(user);
-        user = new User(3, "Brajan", "Husarski", "456789123");
-        usersMock.add(user);
-        users = usersMock;
-//        if (!users.isEmpty()) {
-//            userListProperty.set(FXCollections.observableArrayList(buildUsersListToString(users)));
-//        } else {
-            userListProperty.set(FXCollections.observableArrayList(buildUsersListToString(usersMock)));
-//        }
+//        List<User> usersMock = new ArrayList<>();
+//        User user = new User(1, "Janusz", "Warchoł", "123456789");
+//        usersMock.add(user);
+//        user = new User(2, "Grażyna", "Patriotyczna", "321654987");
+//        usersMock.add(user);
+//        user = new User(3, "Brajan", "Husarski", "456789123");
+//        usersMock.add(user);
+//        users = usersMock;
+        if (!users.isEmpty()) {
+            userListProperty.set(FXCollections.observableArrayList(buildUsersListToString(users)));
+        } else {
+            userListProperty.set(FXCollections.observableArrayList(getErrorList()));
+        }
     }
 
     private List<String> buildRoomsListToString(List<Room> rooms) {
@@ -108,9 +114,9 @@ public class RoomBooking {
     }
 
     private void createProxy() {
-        usersInterface = client.target(UriBuilder.fromPath("http://localhost:8080/pax/rest")).proxy(UsersInterface.class);
-        bookingsInterface = client.target(UriBuilder.fromPath("http://localhost:8080/pax/rest")).proxy(BookingsInterface.class);
-        roomsInterface = client.target(UriBuilder.fromPath("http://localhost:8080/pax/rest")).proxy(RoomsInterface.class);
+        usersInterface = client.target(UriBuilder.fromPath("http://localhost:8181/pax/rest")).proxy(UsersInterface.class);
+        bookingsInterface = client.target(UriBuilder.fromPath("http://localhost:8181/pax/rest")).proxy(BookingsInterface.class);
+        roomsInterface = client.target(UriBuilder.fromPath("http://localhost:8181/pax/rest")).proxy(RoomsInterface.class);
     }
 
     private void createRestConn() {
@@ -122,7 +128,8 @@ public class RoomBooking {
         client = new ResteasyClientBuilder().httpEngine(engine).build();
     }
 
-    @FXML private void showRoomInfo(){
+    @FXML
+    private void showRoomInfo() {
         String tmp = roomsList.getSelectionModel().getSelectedItem();
         roomInfo.setText(tmp);
         String roomId = tmp.substring(3, tmp.indexOf(" "));
@@ -138,7 +145,8 @@ public class RoomBooking {
         return null;
     }
 
-    @FXML private void selectUser() {
+    @FXML
+    private void selectUser() {
         String tmp = userList.getSelectionModel().getSelectedItem();
         String userId = tmp.substring(3, tmp.indexOf(" "));
         user = setUserById(Integer.valueOf(userId));
